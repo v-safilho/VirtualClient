@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-namespace CRC.VirtualClient.Actions
+namespace VirtualClient
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,10 @@ namespace CRC.VirtualClient.Actions
     using System.Threading;
     using System.Threading.Tasks;
 
-    internal class ParallelDownloadHandler
+    /// <summary>
+    /// A dependency component that provides functionality for downloading files from a URL with support for parallel downloads when the server supports range requests.
+    /// </summary>
+    public class ParallelDownloadHandler
     {
         /// <summary>
         /// Defines an interface for handling parallel file downloads, providing access to HTTP and file system
@@ -28,12 +31,26 @@ namespace CRC.VirtualClient.Actions
         /// </remarks>
         public interface IParallelDownloadHandler
         {
+            /// <summary>
+            /// Http client instance to be used for making HTTP requests during the download process. If null, a default HttpClient will be created and used.
+            /// </summary>
             public HttpClient? HttpClient { get; set; }
 
+            /// <summary>
+            /// Indicates whether the file already exists at the destination path.
+            /// </summary>
             public bool FileExists { get; set; }
 
+            /// <summary>
+            /// Gets or sets the length of the file in bytes.
+            /// </summary>
             public long FileLength { get; set; }
-
+            
+            /// <summary>
+            /// Creates a new file stream for the specified destination path.
+            /// </summary>
+            /// <param name="destinationPath">The path of the file to create.</param>
+            /// <returns>A file stream for the specified destination path.</returns>
             FileStream CreateFileStream(string destinationPath);
         }
 

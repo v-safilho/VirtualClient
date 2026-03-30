@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-namespace VirtualClient.Actions
+namespace VirtualClient
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,6 @@ namespace VirtualClient.Actions
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-    using CRC.VirtualClient.Actions;
     using Moq;
     using Moq.Protected;
     using NUnit.Framework;
@@ -173,6 +172,7 @@ namespace VirtualClient.Actions
                         partFiles[path] = stream;
                         return stream;
                     }
+
                     return new ESMockFileSystemStream();
                 });
 
